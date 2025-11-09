@@ -17,11 +17,28 @@ A web application that allows you to automatically remove contacts from Apollo s
 - Apollo API Key
 - Apollo Campaign/Sequence ID
 
-## Installation
+## 🚀 Vercel Deployment (Recommended)
+
+### Quick Deploy
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/suchitsharma2004/Apollo-auto-remove)
+
+### Manual Deployment Steps
+
+1. **Fork/Clone this repository**
+2. **Connect to Vercel**:
+   - Go to [vercel.com](https://vercel.com)
+   - Sign up/login with your GitHub account
+   - Click "Import Project"
+   - Select this repository
+3. **Deploy**: Vercel will automatically build and deploy your app
+4. **Access**: Your app will be live at `https://your-project-name.vercel.app`
+
+## 💻 Local Installation
 
 1. **Clone the repository**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/suchitsharma2004/Apollo-auto-remove.git
    cd Apollo-auto-remove
    ```
 
