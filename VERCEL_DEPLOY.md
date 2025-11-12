@@ -18,7 +18,9 @@ Click this button to deploy instantly:
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/suchitsharma2004/Apollo-auto-remove)
 
-#### Option 2: Manual Deploy
+*If the one-click deploy shows an error, use Option 2 below.*
+
+#### Option 2: Manual Deploy (Recommended)
 
 1. **Go to Vercel Dashboard**
    - Visit [vercel.com](https://vercel.com)
@@ -40,6 +42,27 @@ Click this button to deploy instantly:
    - Click "Deploy"
    - Wait 1-2 minutes for deployment
    - Get your live URL: `https://your-project-name.vercel.app`
+
+#### Option 3: Using Vercel CLI (If UI methods fail)
+
+1. **Install Vercel CLI**
+   ```bash
+   npm install -g vercel
+   ```
+
+2. **Navigate to your project**
+   ```bash
+   cd Apollo-auto-remove
+   ```
+
+3. **Deploy**
+   ```bash
+   vercel
+   ```
+   - Follow the prompts
+   - Login when asked
+   - Confirm settings
+   - Get deployment URL
 
 ### 🔧 Technical Details
 
@@ -78,6 +101,14 @@ Click this button to deploy instantly:
 ### 🐛 Troubleshooting
 
 #### Common Issues:
+
+**"Cloning error" during deployment:**
+1. Try the Manual Deploy option instead of one-click
+2. Make sure you're logged into GitHub and Vercel
+3. Check if the repository is public (required for one-click deploy)
+4. Use Vercel CLI as alternative: `npm i -g vercel && vercel`
+
+**Other Issues:**
 - **API CORS Error**: The API endpoints include CORS headers
 - **404 on API calls**: Check that `/api/` routes are working
 - **Build fails**: Ensure all dependencies are in package.json
