@@ -2,7 +2,7 @@
   "name": "apollo-auto-remove",
   "version": "1.0.0",
   "description": "Application to remove contacts from Apollo sequences",
-  "main": "server.js",
+  "main": "api/health.js",
   "scripts": {
     "build": "echo 'Static site - no build needed'"
   },
