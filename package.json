@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "Application to remove contacts from Apollo sequences",
   "main": "api/health.js",
-  "scripts": {
-    "build": "echo 'Static site - no build needed'"
-  },
+  "scripts": {},
   "dependencies": {
     "axios": "^1.6.0"
   },
