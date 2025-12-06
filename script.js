@@ -77,6 +77,15 @@ async function handleFormSubmit(event) {
     const email = emailInput.value.trim();
     const mode = modeSelect.value;
     
+    // Debug logging
+    console.log('Form submission:', { 
+        apiKey: apiKey ? '***provided***' : 'missing',
+        campaignId: campaignId,
+        campaignIdLength: campaignId.length,
+        email: email,
+        mode: mode 
+    });
+    
     if (!apiKey) {
         showStatusMessage('Please enter your Apollo API key.', 'error');
         return;
@@ -84,6 +93,12 @@ async function handleFormSubmit(event) {
     
     if (!campaignId) {
         showStatusMessage('Please enter the Campaign ID.', 'error');
+        return;
+    }
+    
+    // Validate campaign ID format (24 character hex string)
+    if (!/^[a-fA-F0-9]{24}$/.test(campaignId)) {
+        showStatusMessage('Campaign ID must be 24 hexadecimal characters (like: 68d1103b41c0f700155cd927)', 'error');
         return;
     }
     
