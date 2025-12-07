@@ -96,9 +96,9 @@ async function handleFormSubmit(event) {
         return;
     }
     
-    // Validate campaign ID format (24 character hex string)
-    if (!/^[a-fA-F0-9]{24}$/.test(campaignId)) {
-        showStatusMessage('Campaign ID must be 24 hexadecimal characters (like: 68d1103b41c0f700155cd927)', 'error');
+    // Basic campaign ID validation (just check it's not empty)
+    if (campaignId.length < 10) {
+        showStatusMessage('Please enter a valid Campaign ID.', 'error');
         return;
     }
     
