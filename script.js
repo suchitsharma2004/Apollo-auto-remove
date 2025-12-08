@@ -96,12 +96,6 @@ async function handleFormSubmit(event) {
         return;
     }
     
-    // Basic campaign ID validation (just check it's not empty)
-    if (campaignId.length < 10) {
-        showStatusMessage('Please enter a valid Campaign ID.', 'error');
-        return;
-    }
-    
     if (!validateEmailFormat(email)) {
         showStatusMessage('Please enter a valid email address.', 'error');
         return;
