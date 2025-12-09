@@ -78,32 +78,17 @@ async function handleFormSubmit(event) {
     const mode = modeSelect.value;
     
     // Debug logging
-    console.log('Form submission:', { 
+    console.log('Form submission - passing directly to API:', { 
         apiKey: apiKey ? '***provided***' : 'missing',
         campaignId: campaignId,
-        campaignIdLength: campaignId.length,
         email: email,
         mode: mode 
     });
     
-    if (!apiKey) {
-        showStatusMessage('Please enter your Apollo API key.', 'error');
-        return;
-    }
-    
-    if (!campaignId) {
-        showStatusMessage('Please enter the Campaign ID.', 'error');
-        return;
-    }
-    
-    if (!validateEmailFormat(email)) {
-        showStatusMessage('Please enter a valid email address.', 'error');
-        return;
-    }
-    
     // Save credentials for faster future use
     saveCredentials();
     
+    // Pass directly to API - NO validation
     await removeContact(apiKey, campaignId, email, mode);
 }
 
