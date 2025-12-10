@@ -50,7 +50,7 @@ async function checkApiHealth() {
 
 // Setup form event handlers
 function setupFormHandlers() {
-    form.addEventListener('submit', handleFormSubmit);
+    submitBtn.addEventListener('click', handleButtonClick);
     
     // Real-time email validation
     emailInput.addEventListener('input', validateEmail);
@@ -68,17 +68,15 @@ function setupFormHandlers() {
     });
 }
 
-// Handle form submission
-async function handleFormSubmit(event) {
-    event.preventDefault();
-    
+// Handle button click - direct API call
+async function handleButtonClick() {
     const apiKey = apiKeyInput.value.trim();
-    const campaignId = campaignIdInput.value.trim();
+    const campaignId = campaignIdInput.value.trim(); 
     const email = emailInput.value.trim();
     const mode = modeSelect.value;
     
     // Debug logging
-    console.log('Form submission - passing directly to API:', { 
+    console.log('Button click - passing directly to API:', { 
         apiKey: apiKey ? '***provided***' : 'missing',
         campaignId: campaignId,
         email: email,
@@ -88,7 +86,7 @@ async function handleFormSubmit(event) {
     // Save credentials for faster future use
     saveCredentials();
     
-    // Pass directly to API - NO validation
+    // Pass directly to API - NO validation, NO form submission
     await removeContact(apiKey, campaignId, email, mode);
 }
 

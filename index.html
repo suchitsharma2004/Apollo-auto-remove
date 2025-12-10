@@ -24,7 +24,7 @@
                     <p>Enter your Apollo API key, Campaign ID, and email address to remove the contact from the sequence</p>
                 </div>
 
-                <form id="removeContactForm" class="form" novalidate>
+                <div id="removeContactForm" class="form">
                     <div class="form-group">
                         <label for="apiKey">
                             <i class="fas fa-key"></i>
@@ -77,14 +77,14 @@
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <button type="button" class="btn btn-primary" id="submitBtn">
                         <i class="fas fa-paper-plane"></i>
                         <span class="btn-text">Remove Contact</span>
                         <span class="loader" style="display: none;">
                             <i class="fas fa-spinner fa-spin"></i>
                         </span>
                     </button>
-                </form>
+                </div>
 
                 <!-- Status Messages -->
                 <div id="statusMessage" class="status-message" style="display: none;"></div>
