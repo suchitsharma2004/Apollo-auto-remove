@@ -1,6 +1,49 @@
-const axios = require('axios');
+const https = require('https');
+const { URL } = require('url');
 
 const APOLLO_BASE_URL = 'https://api.apollo.io/api/v1';
+
+// Helper function to make HTTPS requests
+function makeRequest(url, options, data = null) {
+  return new Promise((resolve, reject) => {
+    const parsedUrl = new URL(url);
+    const reqOptions = {
+      hostname: parsedUrl.hostname,
+      port: parsedUrl.port || 443,
+      path: parsedUrl.pathname + parsedUrl.search,
+      method: options.method || 'GET',
+      headers: options.headers || {}
+    };
+
+    if (data) {
+      reqOptions.headers['Content-Length'] = Buffer.byteLength(data);
+    }
+
+    const req = https.request(reqOptions, (res) => {
+      let responseData = '';
+      res.on('data', (chunk) => {
+        responseData += chunk;
+      });
+      res.on('end', () => {
+        try {
+          const jsonData = JSON.parse(responseData);
+          resolve({ data: jsonData, status: res.statusCode });
+        } catch (e) {
+          resolve({ data: responseData, status: res.statusCode });
+        }
+      });
+    });
+
+    req.on('error', (error) => {
+      reject(error);
+    });
+
+    if (data) {
+      req.write(data);
+    }
+    req.end();
+  });
+}
 
 // Headers for Apollo API
 const getHeaders = (apiKey) => ({
@@ -11,11 +54,10 @@ const getHeaders = (apiKey) => ({
 // Function to search for contact by email
 async function searchContactByEmail(email, apiKey) {
   try {
-    const response = await axios.get(`${APOLLO_BASE_URL}/contacts/search`, {
-      headers: getHeaders(apiKey),
-      params: {
-        q_keywords: email
-      }
+    const url = `${APOLLO_BASE_URL}/contacts/search?q_keywords=${encodeURIComponent(email)}`;
+    const response = await makeRequest(url, {
+      method: 'GET',
+      headers: getHeaders(apiKey)
     });
     
     if (response.data.contacts && response.data.contacts.length > 0) {
@@ -23,7 +65,7 @@ async function searchContactByEmail(email, apiKey) {
     }
     return null;
   } catch (error) {
-    console.error('Error searching for contact:', error.response?.data || error.message);
+    console.error('Error searching for contact:', error.message);
     throw new Error('Failed to search for contact');
   }
 }
@@ -31,22 +73,21 @@ async function searchContactByEmail(email, apiKey) {
 // Function to remove contact from sequence
 async function removeContactFromSequence(contactId, campaignId, mode = 'remove', apiKey) {
   try {
-    const response = await axios.post(
-      `${APOLLO_BASE_URL}/emailer_campaigns/remove_or_stop_contact_ids`,
-      {},
-      {
-        headers: getHeaders(apiKey),
-        params: {
-          'emailer_campaign_ids[]': campaignId,
-          'contact_ids[]': contactId,
-          mode: mode
-        }
-      }
-    );
+    const params = new URLSearchParams({
+      'emailer_campaign_ids[]': campaignId,
+      'contact_ids[]': contactId,
+      mode: mode
+    });
+    const url = `${APOLLO_BASE_URL}/emailer_campaigns/remove_or_stop_contact_ids?${params.toString()}`;
+    
+    const response = await makeRequest(url, {
+      method: 'POST',
+      headers: getHeaders(apiKey)
+    }, '{}');
     
     return response.data;
   } catch (error) {
-    console.error('Error removing contact from sequence:', error.response?.data || error.message);
+    console.error('Error removing contact from sequence:', error.message);
     throw new Error('Failed to remove contact from sequence');
   }
 }

@@ -4,9 +4,7 @@
   "description": "Application to remove contacts from Apollo sequences",
   "main": "api/health.js",
   "scripts": {},
-  "dependencies": {
-    "axios": "^1.6.0"
-  },
+  "dependencies": {},
   "keywords": [
     "apollo",
     "sequence",
