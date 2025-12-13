@@ -57,7 +57,7 @@ A web application that allows you to automatically remove contacts from Apollo s
    Edit the `.env` file and add your Apollo credentials:
    ```env
    APOLLO_API_KEY=your_apollo_api_key_here
-   APOLLO_CAMPAIGN_ID=68d1103b41c0f700155cd927
+   APOLLO_CAMPAIGN_ID=68d1103b41c0fXXXXXXXX
    PORT=3000
    ```
 
@@ -107,7 +107,7 @@ Content-Type: application/json
 
 {
   "apiKey": "your_apollo_api_key",
-  "campaignId": "68d1103b41c0f700155cd927", 
+  "campaignId": "68d1103b41c0f700XXXXXXXX", 
   "email": "contact@example.com",
   "mode": "remove"  // or "mark_as_finished"
 }
